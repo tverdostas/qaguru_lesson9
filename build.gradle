@@ -1,0 +1,32 @@
+plugins {
+    id 'java-library'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(
+            "com.codeborne:selenide:7.9.4",
+            "org.junit.jupiter:junit-jupiter:5.9.3",
+            "com.github.javafaker:javafaker:1.0.2",
+            "org.slf4j:slf4j-simple:2.0.17",
+            "commons-io:commons-io:2.15.1",
+            "com.codeborne:pdf-test:2.0.0"
+    )
+
+    testRuntimeOnly(
+            "org.slf4j:slf4j-api:2.0.17"
+    )
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+test {
+    useJUnitPlatform()
+}
