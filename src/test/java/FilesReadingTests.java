@@ -1,30 +1,25 @@
 import com.codeborne.xlstest.XLS;
 import com.opencsv.CSVReader;
+import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.List;
 
 import com.codeborne.pdftest.PDF;
 
-
-
 public class FilesReadingTests {
+    File zipFile = new File("src/test/resources/files_for_tests.zip");
+    ZipFile zip;
 
-/*    @Test
-    void numberOfCatalogPagesCorrect() throws Exception {
-        File pdfTestFile = new File("src/test/resources/NCS_palette.pdf");
-        PDF pdf = new PDF(pdfTestFile);
-        Assertions.assertEquals(33, pdf.numberOfPages);
-    }*/
+    public FilesReadingTests() throws IOException {
+        zip = new ZipFile(zipFile);
+    }
 
     @Test
     void numberOfCatalogPagesCorrectTest() throws Exception {
-        InputStream inputStream = getClass().getResourceAsStream("/NCS_palette.pdf");
+        InputStream inputStream = zip.getInputStream(zip.getEntry("NCS_palette.pdf"));
         if (inputStream == null) {
             throw new FileNotFoundException("Файл не найден: NCS_palette.pdf");
         }
@@ -33,8 +28,8 @@ public class FilesReadingTests {
     }
 
     @Test
-    void exelTest() throws Exception {
-        InputStream inputStream = getClass().getResourceAsStream("/test_table.xlsx");
+    void correctCheckAmountTest() throws Exception {
+        InputStream inputStream = zip.getInputStream(zip.getEntry("test_table.xlsx"));
         if (inputStream == null) {
             throw new FileNotFoundException("Файл не найден: test_table.xlsx");
         }
@@ -43,13 +38,17 @@ public class FilesReadingTests {
         int actualValue = (int) xls.excel.getSheetAt(0).getRow(5).getCell(3).getNumericCellValue();
         Assertions.assertEquals(2350, actualValue);
     }
+
     @Test
-    void csvTest() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("user_migration.csv");
-        CSVReader csvReader = new CSVReader(new InputStreamReader(is)){
-            List<String[]> data = csvReader.readAll();
-            Assertions.assertEquals(10, data.size()); // Проверяем количество строк в файле
+    void userListSizeCorrectTest() throws Exception {
+        InputStream inputStream = zip.getInputStream(zip.getEntry("user_migration.csv"));
+        if (inputStream == null) {
+            throw new FileNotFoundException("Файл не найден: user_migration.csv");
         }
+        CSVReader csvReader = new CSVReader(new InputStreamReader(inputStream));
+
+            List<String[]> data = csvReader.readAll();
+            Assertions.assertEquals(4, data.size());
     }
     }
 
