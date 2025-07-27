@@ -1,6 +1,4 @@
 import com.codeborne.xlstest.XLS;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReader;
 import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.junit.jupiter.api.Assertions;
@@ -10,9 +8,6 @@ import java.io.*;
 import java.util.List;
 
 import com.codeborne.pdftest.PDF;
-import pojo.Recipe;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class FilesReadingTests {
     File zipFile = new File("src/test/resources/files_for_tests.zip");

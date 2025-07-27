@@ -9,20 +9,12 @@ import lombok.NoArgsConstructor;
 public class Ingredients {
     @JsonProperty("ingredient_name")
     private String ingredientName;
-    private Integer weight;
+    private int weight;
     public String getIngredientName() {
         return ingredientName;
     }
 
-    public void setIngredientName(String ingredientName) {
-        this.ingredientName = ingredientName;
-    }
-
     public Integer getWeight() {
         return weight;
-    }
-
-    public void setWeight(Integer weight) {
-        this.weight = weight;
     }
 }

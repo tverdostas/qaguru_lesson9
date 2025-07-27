@@ -23,30 +23,6 @@ public class Recipe {
     private boolean haveLactose;
     private List<Ingredients> ingredients;
 
-    public void setDishId(int dishId) {
-        this.dishId = dishId;
-    }
-
-    public void setDishName(String dishName) {
-        this.dishName = dishName;
-    }
-
-    public void setQuantityOfReadyMeals(int quantityOfReadyMeals) {
-        this.quantityOfReadyMeals = quantityOfReadyMeals;
-    }
-
-    public void setCalorieContent(int calorieContent) {
-        this.calorieContent = calorieContent;
-    }
-
-    public void setHaveLactose(boolean haveLactose) {
-        this.haveLactose = haveLactose;
-    }
-
-    public void setIngredients(List<Ingredients> ingredients) {
-        this.ingredients = ingredients;
-    }
-
     public List<Ingredients> getIngredients() {
         return ingredients;
     }
