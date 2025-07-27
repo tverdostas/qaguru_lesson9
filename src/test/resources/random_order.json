@@ -1,0 +1,21 @@
+{
+    "dish_id": 1020,
+    "dish_name": "сырники",
+    "quantity_of_ready_meals": 4,
+    "calorie_content": 300,
+    "have_lactose": true,
+    "ingredients": [
+        {
+            "ingredient_name": "творог",
+			"weight": 400
+        },
+		{
+            "ingredient_name": "манка",
+			"weight": 80
+        },
+		{
+            "ingredient_name": "сахар",
+			"weight": 50
+        }
+    ]
+}
