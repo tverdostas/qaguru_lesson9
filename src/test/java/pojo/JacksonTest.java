@@ -18,21 +18,6 @@ public class JacksonTest {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         Recipe recipe = objectMapper.readValue(file, Recipe.class);
 
-        String dishNameFromJson = objectMapper.readTree(file).get("dish_name").asText();
-        recipe.setDishName(dishNameFromJson);
-
-        int dishIdFromJson = objectMapper.readTree(file).get("dish_id").asInt();
-        recipe.setDishId(dishIdFromJson);
-
-        int dishQuantityOfReadyMealsFromJson = objectMapper.readTree(file).get("quantity_of_ready_meals").asInt();
-        recipe.setQuantityOfReadyMeals(dishQuantityOfReadyMealsFromJson);
-
-        int dishCalorieContentFromJson = objectMapper.readTree(file).get("calorie_content").asInt();
-        recipe.setCalorieContent(dishCalorieContentFromJson);
-
-        boolean dishHaveLactoseFromJson = objectMapper.readTree(file).get("have_lactose").asBoolean();
-        recipe.setHaveLactose(dishHaveLactoseFromJson);
-
         assertEquals(1020, recipe.getDishId());
 
         assertEquals("сырники",
@@ -43,5 +28,16 @@ public class JacksonTest {
         assertEquals(300, recipe.getCalorieContent());
 
         assertEquals(true, recipe.getHaveLactose());
+
+        assertEquals("творог", recipe.getIngredients().get(0).getIngredientName());
+        assertEquals(400, recipe.getIngredients().get(0).getWeight());
+
+        assertEquals("манка", recipe.getIngredients().get(1).getIngredientName());
+        assertEquals(80, recipe.getIngredients().get(1).getWeight());
+
+        assertEquals("сахар", recipe.getIngredients().get(2).getIngredientName());
+        assertEquals(50, recipe.getIngredients().get(2).getWeight());
+
+        assertEquals(3, recipe.getIngredients().size());
     }
 }
